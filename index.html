@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mavluda ❤️</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --pink: #ff5c8a;
+      --pink-light: #ffb6c9;
+      --pink-soft: #fff0f5;
+      --text: #30232a;
+      --white: #ffffff;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: "DM Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, #ffdce8 0, transparent 28%),
+        radial-gradient(circle at 85% 80%, #ffe7ef 0, transparent 30%),
+        linear-gradient(135deg, #ffffff, #fff5f8);
+    }
+
+    /* ---------- BACKGROUND ---------- */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(50px);
+      opacity: .35;
+      animation: float 8s ease-in-out infinite alternate;
+    }
+
+    .blob.one {
+      width: 300px;
+      height: 300px;
+      background: #ffb5cb;
+      top: -100px;
+      left: -100px;
+    }
+
+    .blob.two {
+      width: 350px;
+      height: 350px;
+      background: #ffd2df;
+      bottom: -130px;
+      right: -100px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(30px, -25px);
+      }
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(650px, 100%);
+      padding: 55px 45px;
+      text-align: center;
+
+      background: rgba(255, 255, 255, .70);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 32px;
+
+      box-shadow:
+        0 30px 80px rgba(255, 92, 138, .16),
+        inset 0 1px 0 rgba(255,255,255,.8);
+
+      animation: cardIn 1s ease;
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px) scale(.97);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .small-text {
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink);
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(42px, 8vw, 70px);
+      line-height: 1.05;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--pink);
+    }
+
+    .subtitle {
+      max-width: 470px;
+      margin: 0 auto 35px;
+      color: #725d66;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .buttons {
+      position: relative;
+      min-height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 700;
+      transition: .25s ease;
+    }
+
+    .yes-btn {
+      padding: 15px 32px;
+      color: white;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff4f82, #ff7fa4);
+      box-shadow: 0 12px 25px rgba(255, 79, 130, .28);
+    }
+
+    .yes-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 17px 30px rgba(255, 79, 130, .35);
+    }
+
+    .no-btn {
+      padding: 15px 27px;
+      color: #795d67;
+      background: #fff;
+      border: 1px solid #f1dce3;
+      border-radius: 999px;
+      position: relative;
+    }
+
+    .no-btn:hover {
+      background: #fff8fa;
+    }
+
+    .result {
+      display: none;
+      animation: resultIn .8s ease;
+    }
+
+    @keyframes resultIn {
+      from {
+        opacity: 0;
+        transform: scale(.92) translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .heart {
+      width: 95px;
+      height: 95px;
+      margin: 0 auto 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffdae6, #fff);
+      box-shadow: 0 15px 40px rgba(255, 92, 138, .18);
+
+      font-size: 48px;
+      animation: heartbeat 1.5s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.1);
+      }
+    }
+
+    .result h2 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(34px, 7vw, 52px);
+      margin-bottom: 18px;
+    }
+
+    .result h2 span {
+      color: var(--pink);
+    }
+
+    .message {
+      font-family: "Playfair Display", serif;
+      font-size: 20px;
+      line-height: 1.7;
+      color: #634e58;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    .signature {
+      margin-top: 28px;
+      color: var(--pink);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -30px;
+      pointer-events: none;
+      animation: rise linear forwards;
+      z-index: 10;
+    }
+
+    @keyframes rise {
+      0% {
+        opacity: 0;
+        transform: translateY(0) scale(.7) rotate(0deg);
+      }
+
+      15% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        transform:
+          translateY(-110vh)
+          translateX(var(--move))
+          scale(1.2)
+          rotate(25deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .page {
+        padding: 16px;
+      }
+
+      .card {
+        padding: 42px 22px;
+        border-radius: 27px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+        margin-bottom: 28px;
+      }
+
+      .buttons {
+        min-height: 125px;
+        flex-direction: column;
+      }
+
+      .yes-btn,
+      .no-btn {
+        width: 170px;
+      }
+
+      .heart {
+        width: 82px;
+        height: 82px;
+        font-size: 40px;
+      }
+
+      .message {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background">
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+  </div>
+
+  <main class="page">
+
+    <section class="card">
+
+      <!-- FIRST SCREEN -->
+
+      <div id="question">
+
+        <div class="small-text">
+          ❤️ Mavludamga maxsus
+        </div>
+
+        <h1>
+          Mani <span>sevasizmi?</span>
+        </h1>
+
+        <p class="subtitle">
+          Bu savolga shunchaki javob bermang...
+          yuragingizdan kelgan javobni bering 🤍
+        </p>
+
+        <div class="buttons" id="buttons">
+
+          <button class="yes-btn" onclick="sayYes()">
+            Ha ❤️
+          </button>
+
+          <button class="no-btn" id="noBtn">
+            Yo‘q 🙈
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="result" id="result">
+
+        <div class="heart">
+          ❤️
+        </div>
+
+        <h2>
+          Bilardim, <span>Mavludam</span>❤️
+        </h2>
+
+        <p class="message">
+          Siz mening hayotimdagi eng chiroyli
+          tasodifsiz tasodifsizligimsiz...
+          <br><br>
+          Sharq go‘zali, tabassumingiz kunimni,
+          ovozingiz esa qalbimni chiroyli qiladi.
+          ✨
+          <br><br>
+          Har doim yuzingizda tabassum bo‘lsin.
+          Go'zalim sizga kulish juda yarashadi. 🤍
+        </p>
+
+        <div class="signature">
+          — Sizni jonidan ortiq ko'radigan Aliyingizdan ❤️
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script>
+
+    const noBtn = document.getElementById("noBtn");
+    const buttons = document.getElementById("buttons");
+
+    let attempts = 0;
+
+    function moveNoButton() {
+
+      attempts++;
+
+      const maxX = Math.min(170, window.innerWidth * 0.30);
+      const maxY = 80;
+
+      const x = (Math.random() * maxX * 2) - maxX;
+      const y = (Math.random() * maxY * 2) - maxY;
+
+      noBtn.style.position = "absolute";
+      noBtn.style.transform =
+        `translate(${x}px, ${y}px) rotate(${Math.random() * 10 - 5}deg)`;
+
+      if (attempts >= 3) {
+        noBtn.innerText = "Hali ham yo‘qmi? 🥺";
+      }
+
+      if (attempts >= 6) {
+        noBtn.innerText = "Yaxshisi Ha ni bosing 😌";
+      }
+    }
+
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    noBtn.addEventListener("touchstart", function(e) {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+
+    function sayYes() {
+
+      document.getElementById("question").style.display = "none";
+      document.getElementById("result").style.display = "block";
+
+      createHearts(35);
+
+      let interval = setInterval(() => {
+        createHearts(3);
+      }, 450);
+
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 7000);
+    }
+
+
+    function createHearts(count = 1) {
+
+      const hearts = ["❤️", "💗", "💕", "💖", "🤍"];
+
+      for (let i = 0; i < count; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "floating-heart";
+
+        heart.innerText =
+          hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left =
+          Math.random() * 100 + "vw";
+
+        heart.style.fontSize =
+          (14 + Math.random() * 22) + "px";
+
+        heart.style.setProperty(
+          "--move",
+          (Math.random() * 180 - 90) + "px"
+        );
+
+        heart.style.animationDuration =
+          (4 + Math.random() * 4) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 9000);
+      }
+    }
+
+  </script>
+
+</body>
+</html>
